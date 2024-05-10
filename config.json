@@ -1,0 +1,323 @@
+{
+    "profiler_cmd": "sudo -E perf stat -e power/energy-pkg/ -o {result_dir} -a",
+    "runs_per_config": "5",
+    "languages": [
+        {
+            "language": "C",
+            "extension": "c",
+            "compilers": [
+                {
+                    "name": "gcc",
+                    "build_cmd": "gcc main.c -o {output}",
+                    "path": "/home/$USER/compilers/gcc/bin"
+                },
+                {
+                    "name": "clang",
+                    "build_cmd": "clang main.c -o {output}",
+                    "path": "/home/$USER/compilers/clang/bin"
+                },
+                {
+                    "name": "aocc",
+                    "build_cmd": "clang main.c -o {output}",
+                    "path": "/home/$USER/compilers/aocc/share/opt-viewer:/home/$USER/compilers/aocc/bin"
+                },
+                {
+                    "name": "icx",
+                    "build_cmd": "icx main.c -o {output}",
+                    "path": "/home/$USER/compilers/oneapi/dev-utilities/latest/bin:/home/$USER/compilers/oneapi/debugger/latest/opt/debugger/bin:/home/$USER/compilers/oneapi/compiler/latest/opt/oclfpga/bin:/home/$USER/compilers/oneapi/compiler/latest/bin",
+                    "extra_env": "LD_LIBRARY_PATH=/home/$USER/compilers/oneapi/tbb/2021.11/env/../lib/intel64/gcc4.8:/home/$USER/compilers/oneapi/dpl/2022.3/lib:/home/$USER/compilers/oneapi/debugger/2024.0/opt/debugger/lib:/home/$USER/compilers/oneapi/compiler/2024.0/opt/oclfpga/host/linux64/lib:/home/$USER/compilers/oneapi/compiler/2024.0/opt/compiler/lib:/home/$USER/compilers/oneapi/compiler/2024.0/lib"
+                }
+            ]
+        },
+        {
+            "language": "C++",
+            "extension": "cpp",
+            "compilers": [
+                {
+                    "name": "g++",
+                    "build_cmd": "g++ main.cpp -o {output}",
+                    "path": "/home/$USER/compilers/gcc/bin"
+                },
+                {
+                    "name": "clang++",
+                    "build_cmd": "clang++ main.cpp -o {output}",
+                    "path": "/home/$USER/compilers/clang/bin"
+                },
+                {
+                    "name": "aocc++",
+                    "build_cmd": "clang++ main.cpp -o {output}",
+                    "path": "/home/$USER/compilers/aocc/share/opt-viewer:/home/$USER/compilers/aocc/bin"
+                },
+                {
+                    "name": "icpx",
+                    "build_cmd": "icpx main.cpp -o {output}",
+                    "path": "/home/$USER/compilers/oneapi/dev-utilities/latest/bin:/home/$USER/compilers/oneapi/debugger/latest/opt/debugger/bin:/home/$USER/compilers/oneapi/compiler/latest/opt/oclfpga/bin:/home/$USER/compilers/oneapi/compiler/latest/bin",
+                    "extra_env": "LD_LIBRARY_PATH=/home/$USER/compilers/oneapi/tbb/2021.11/env/../lib/intel64/gcc4.8:/home/$USER/compilers/oneapi/dpl/2022.3/lib:/home/$USER/compilers/oneapi/debugger/2024.0/opt/debugger/lib:/home/$USER/compilers/oneapi/compiler/2024.0/opt/oclfpga/host/linux64/lib:/home/$USER/compilers/oneapi/compiler/2024.0/opt/compiler/lib:/home/$USER/compilers/oneapi/compiler/2024.0/lib"
+                }
+            ]
+        },
+        {
+            "language": "C#",
+            "extension": "cs",
+            "compilers": [
+                {
+                    "name": "dotnet",
+                    "build_cmd": "dotnet build -c Release",
+                    "path": "/home/$USER/compilers/dotnet",
+                    "extra_env": "DOTNET_ROOT=/home/$USER/compilers/dotnet",
+                    "output_dir": "bin/Release/net8.0"
+                }
+            ]
+        },
+        {
+            "language": "Go",
+            "extension": "go",
+            "compilers": [
+                {
+                    "name": "gc",
+                    "build_cmd": "go build",
+                    "path": "/home/$USER/compilers/gc/bin"
+                },
+                {
+                    "name": "gccgo",
+                    "build_cmd": "gccgo main.go -o {output}",
+                    "path": "/home/$USER/compilers/gcc/bin"
+                }
+            ]
+        },
+        {
+            "language": "Java",
+            "extension": "java",
+            "compilers": [
+                {
+                    "name": "oraclejdk",
+                    "build_cmd": "javac Main.java",
+                    "path": "/home/$USER/compilers/jdk/bin",
+                    "run_cmd": "java Main"
+                },
+                {
+                    "name": "openjdk",
+                    "build_cmd": "javac Main.java",
+                    "path": "/home/$USER/compilers/openjdk/bin",
+                    "run_cmd": "java Main"
+                },
+                {
+                    "name": "graalvm",
+                    "build_cmd": "javac Main.java",
+                    "path": "/home/$USER/compilers/graalvm/bin",
+                    "run_cmd": "java Main"
+                },
+                {
+                    "name": "zulu",
+                    "build_cmd": "javac Main.java",
+                    "path": "/home/$USER/compilers/zulu/bin",
+                    "run_cmd": "java Main"
+                }
+            ]
+        },
+        {
+            "language": "Python",
+            "extension": "py",
+            "compilers": [
+                {
+                    "name": "cpython",
+                    "path": "/home/$USER/compilers/cpython/bin",
+                    "run_cmd": "python {file}"
+                },
+                {
+                    "name": "pypy",
+                    "path": "/home/$USER/compilers/pypy/bin",
+                    "run_cmd": "pypy {file}"
+                }
+            ]
+        },
+        {
+            "language": "Ruby",
+            "extension": "rb",
+            "compilers": [
+                {
+                    "name": "ruby",
+                    "path": "/home/$USER/compilers/ruby/bin",
+                    "run_cmd": "ruby --jit {file}"
+                },
+                {
+                    "name": "jruby",
+                    "path": "/home/$USER/compilers/jruby/bin:/home/$USER/compilers/jdk/bin",
+                    "run_cmd": "jruby {file}"
+                },
+                {
+                    "name": "truffleruby",
+                    "path": "/home/$USER/compilers/truffleruby/bin",
+                    "run_cmd": "truffleruby {file}"
+                }
+            ]
+        },
+        {
+            "language": "Rust",
+            "extension": "rs",
+            "compilers": [
+                {
+                    "name": "cargo",
+                    "build_cmd": "cargo build --release",
+                    "path": "/home/$USER/compilers/cargo/bin",
+                    "output_dir": "target/release"
+                }
+            ]
+        },
+        {
+            "language": "Swift",
+            "extension": "swft",
+            "compilers": [
+                {
+                    "name": "swift",
+                    "build_cmd": "swift build -c release",
+                    "path": "/home/$USER/compilers/swift/bin",
+                    "output_dir": ".build/release"
+                }
+            ]
+        }
+    ],
+    "benchmarks": [
+        {
+            "name": "fft",
+            "test_args": [
+                "8 2097152 1",
+                "8 1048576 12",
+                "22 48 1",
+                "22 16 12"
+            ],
+            "compiler_args": [
+                {
+                    "name": "gcc",
+                    "args": "-O3 -flto -march=native -mtune=native -fwhole-program -lm"
+                },
+                {
+                    "name": "clang",
+                    "args": "-O3 -flto -march=native -mtune=native -lm"
+                },
+                {
+                    "name": "aocc",
+                    "args": "-O3 -flto -march=native -mtune=native -lm"
+                },
+                {
+                    "name": "icx",
+                    "args": "-O3 -flto -fp-model=precise -march=znver3 -lm"
+                },
+                {
+                    "name": "g++",
+                    "args": "-O3 -flto -march=native -mtune=native -fwhole-program -lm -lstdc++ -std=c++20"
+                },
+                {
+                    "name": "clang++",
+                    "args": "-O3 -flto -march=native -mtune=native -lm -lstdc++ -std=c++20"
+                },
+                {
+                    "name": "aocc++",
+                    "args": "-O3 -flto -march=native -mtune=native -lm -lstdc++ -std=c++20"
+                },
+                {
+                    "name": "icpx",
+                    "args": "-O3 -flto -fp-model=precise -march=znver3 -lm -lstdc++ -std=c++20"
+                },
+                {
+                    "name": "gccgo",
+                    "args": "-O3 -flto -march=native -mtune=native"
+                }
+            ]
+        },
+        {
+            "name": "sha512",
+            "test_args": [
+                "/home/ces/tools/filegen/test.txt 1",
+                "/home/ces/tools/filegen/test.txt 4"
+            ],
+            "compiler_args": [
+                {
+                    "name": "gcc",
+                    "args": "-O3 -flto -march=native -mtune=native -fwhole-program -lm"
+                },
+                {
+                    "name": "clang",
+                    "args": "-O3 -flto -march=native -mtune=native -lm"
+                },
+                {
+                    "name": "aocc",
+                    "args": "-O3 -flto -march=native -mtune=native -lm"
+                },
+                {
+                    "name": "icx",
+                    "args": "-O3 -flto -fp-model=precise -march=znver3 -lm"
+                },
+                {
+                    "name": "g++",
+                    "args": "-O3 -flto -march=native -mtune=native -fwhole-program -lm -lstdc++ -std=c++20"
+                },
+                {
+                    "name": "clang++",
+                    "args": "-O3 -flto -march=native -mtune=native -lm -lstdc++ -std=c++20"
+                },
+                {
+                    "name": "aocc++",
+                    "args": "-O3 -flto -march=native -mtune=native -lm -lstdc++ -std=c++20"
+                },
+                {
+                    "name": "icpx",
+                    "args": "-O3 -flto -fp-model=precise -march=znver3 -lm -lstdc++ -std=c++20"
+                },
+                {
+                    "name": "gccgo",
+                    "args": "-O3 -flto -march=native -mtune=native"
+                }
+            ]
+        },
+        {
+            "name": "eigenvalue",
+            "test_args": [
+                "32 3 5120 1",
+                "32 3 3072 12",
+                "64 3 128 1",
+                "64 3 96 12",
+                "96 3 16 1",
+                "96 3 12 12"
+            ],
+            "compiler_args": [
+                {
+                    "name": "gcc",
+                    "args": "-O3 -flto -march=native -mtune=native -fwhole-program -lm"
+                },
+                {
+                    "name": "clang",
+                    "args": "-O3 -flto -march=native -mtune=native -lm"
+                },
+                {
+                    "name": "aocc",
+                    "args": "-O3 -flto -march=native -mtune=native -lm"
+                },
+                {
+                    "name": "icx",
+                    "args": "-O3 -flto -fp-model=precise -march=znver3 -lm"
+                },
+                {
+                    "name": "g++",
+                    "args": "-O3 -flto -march=native -mtune=native -fwhole-program -lm -lstdc++ -std=c++20"
+                },
+                {
+                    "name": "clang++",
+                    "args": "-O3 -flto -march=native -mtune=native -lm -lstdc++ -std=c++20"
+                },
+                {
+                    "name": "aocc++",
+                    "args": "-O3 -flto -march=native -mtune=native -lm -lstdc++ -std=c++20"
+                },
+                {
+                    "name": "icpx",
+                    "args": "-O3 -flto -fp-model=precise -march=znver3 -lm -lstdc++ -std=c++20"
+                },
+                {
+                    "name": "gccgo",
+                    "args": "-O3 -flto -march=native -mtune=native"
+                }
+            ]
+        }
+    ]
+}
